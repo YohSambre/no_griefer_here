@@ -12,7 +12,7 @@ end
 
 hook.Add("OnPhysgunReload", "PPP_PHYSGUN_BASIC_PREVENTION", PhysgunBasicProtection)
 
-local function SoBad(ply)
+local function SoBad(_, ply)
 
     local iValue = ply:GetInfo("cl_weaponcolor")
     if not (ply:IsAdmin()) and iValue ~= "255 255 0" then
@@ -21,9 +21,7 @@ local function SoBad(ply)
 
 end
 
-hook.Add("WeaponEquip", "NGH_INITIALSPAWN_PHYSGUN_LASER_CATCHER", function(_, ply)
-    SoBad(ply)
-end)
+hook.Add("WeaponEquip", "NGH_INITIALSPAWN_PHYSGUN_LASER_CATCHER", SoBad)
 
 local function SoNotCrazy(ply)
     if not IsValid(ply) then return end
