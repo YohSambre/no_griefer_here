@@ -14,7 +14,7 @@ local function SoPop(ent)
 end
 
 local tTool = {
-    ["collision"] = true
+    ["collision"] = true,
     ["nocollide"] = true
 }
 
