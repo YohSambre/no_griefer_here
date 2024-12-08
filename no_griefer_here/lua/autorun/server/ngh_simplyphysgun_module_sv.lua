@@ -21,7 +21,9 @@ local function SoBad(ply)
 
 end
 
-hook.Add("WeaponEquip", "NGH_INITIALSPAWN_PHYSGUN_LASER_CATCHER", SoBad)
+hook.Add("WeaponEquip", "NGH_INITIALSPAWN_PHYSGUN_LASER_CATCHER", function(_, ply)
+    SoBad(ply)
+end)
 
 local function SoNotCrazy(ply)
     if not IsValid(ply) then return end
