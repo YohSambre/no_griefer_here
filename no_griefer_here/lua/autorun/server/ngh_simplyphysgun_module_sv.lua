@@ -14,10 +14,12 @@ hook.Add("OnPhysgunReload", "PPP_PHYSGUN_BASIC_PREVENTION", PhysgunBasicProtecti
 
 local function SoBad(_, ply)
     local iValue = ply:GetInfo("cl_weaponcolor")
-    if not ply:IsAdmin() and iValue ~= "255 255 0" then
-        ply:SendLua('RunConsoleCommand("cl_weaponcolor", "255 255 0")')
+    if not (ply:IsAdmin()) and iValue ~= "255 255 0" then
+        ply:SendLua('RunConsoleCommand("cl_weaponcolor", "255 255 0")') -- (é_é')
     end
+
 end
+
 hook.Add("WeaponEquip", "NGH_INITIALSPAWN_PHYSGUN_LASER_CATCHER", SoBad)
 
 local function SoNotCrazy(ply)
