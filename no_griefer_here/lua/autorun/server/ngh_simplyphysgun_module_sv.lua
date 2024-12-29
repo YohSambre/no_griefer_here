@@ -49,7 +49,7 @@ local tClassEntities = {
 }
 
 local function NGHOPP(ply, ent)
-    if IsValid(ent) and (tClassEntities[ent:GetClass()]) then
+    if IsValid(ent) and ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and (tClassEntities[ent:GetClass()]) then
         timer.Stop( "NGH_PD" ) -- mandatory..
         ent:SetCollisionGroup(11)
         ent:SetMaterial("models/shiny") -- https://www.youtube.com/watch?v=TsIhEbXOqQ8
@@ -66,7 +66,7 @@ end
 hook.Add("PhysgunPickup", "NGH_GHOSTED_PROPANDTOOL_PICKUP", NGHOPP)
 
 local function NGHOPD(ply, ent)
-    if IsValid(ent) and (tClassEntities[ent:GetClass()]) then
+    if IsValid(ent) and ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and (tClassEntities[ent:GetClass()]) then
         timer.Create( "NGH_PD", 7, 1, function() -- i obviously wanted to use timer.Simple , the problem was that it caused a problem that bypassed my antipropblock/proppush
             if IsValid(ent) then
                 ent:SetCollisionGroup(0)
