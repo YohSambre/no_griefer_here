@@ -49,8 +49,11 @@ local tClassEntities = {
 }
 
 local function NGHOPP(ply, ent)
-    if IsValid(ent) and ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and (tClassEntities[ent:GetClass()]) then
-        timer.Stop( "NGH_PD" ) -- mandatory..
+    if not IsValid(ent) then return end
+
+    if engine.ActiveGamemode() == "darkrp" then
+        if not (ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and tClassEntities[ent:GetClass()]) then return end
+    end
         ent:SetCollisionGroup(11)
         ent:SetMaterial("models/shiny") -- https://www.youtube.com/watch?v=TsIhEbXOqQ8
         constraint.RemoveConstraints(ent, "Weld")
@@ -61,19 +64,20 @@ local function NGHOPP(ply, ent)
         constraint.RemoveConstraints(ent, "Rope")
         constraint.RemoveConstraints(ent, "Slider")
         constraint.RemoveConstraints(ent, "Winch")
-    end
 end
 hook.Add("PhysgunPickup", "NGH_GHOSTED_PROPANDTOOL_PICKUP", NGHOPP)
 
 local function NGHOPD(ply, ent)
-    if IsValid(ent) and ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and (tClassEntities[ent:GetClass()]) then
+    if not IsValid(ent) then return end
+    if engine.ActiveGamemode() == "darkrp" then
+        if not (ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and tClassEntities[ent:GetClass()]) then return end
+    end
         timer.Create( "NGH_PD", 7, 1, function() -- i obviously wanted to use timer.Simple , the problem was that it caused a problem that bypassed my antipropblock/proppush
             if IsValid(ent) then
-                ent:SetCollisionGroup(0)
-                ent:SetMaterial("")
-            end
-        end)
-    end
+            ent:SetCollisionGroup(0)
+            ent:SetMaterial("")
+        end
+    end)
 end
 hook.Add("PhysgunDrop", "NGH_GHOSTED_PROPANDTOOL_PHYSGUNDROP", NGHOPD)
 
