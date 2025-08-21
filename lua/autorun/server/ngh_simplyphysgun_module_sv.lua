@@ -80,11 +80,12 @@ hook.Add("PhysgunDrop", "NGH_GHOSTED_PROPANDTOOL_PHYSGUNDROP", NGHOPD)
 local function NGHOEC(ent)
     if IsValid(ent) and (tClassEntities[ent:GetClass()]) then
         timer.Simple(0, function()
-            if IsValid(ent) then
+            if not IsValid(ent) then return end
                 ent:SetCollisionGroup(11)
                 ent:SetMaterial(ngh_customm:GetString())
-                timer.Simple(3, function()
-                    if IsValid(ent) then
+                local tname = "NGH_SPAWN_" .. ent:EntIndex()
+                timer.Create(tname, 3, 1, function()
+                    if IsValid(ent) and not ent.IsGrabbed then
                         ent:SetCollisionGroup(0)
                         ent:SetMaterial("")
                     end
@@ -94,3 +95,4 @@ local function NGHOEC(ent)
     end
 end
 hook.Add("OnEntityCreated", "NGH_GHOSTED_SPAWNED_ENTITY", NGHOEC)
+
