@@ -86,13 +86,11 @@ local function NGHOEC(ent)
                 local tname = "NGH_SPAWN_" .. ent:EntIndex()
                 timer.Create(tname, 3, 1, function()
                     if IsValid(ent) and not ent.IsGrabbed then
-                        ent:SetCollisionGroup(0)
-                        ent:SetMaterial("")
-                    end
-                end)
-            end
+                ent:SetCollisionGroup(0)
+            ent:SetMaterial("")
         end)
-    end
+    end)
 end
 hook.Add("OnEntityCreated", "NGH_GHOSTED_SPAWNED_ENTITY", NGHOEC)
+
 
