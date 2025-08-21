@@ -4,7 +4,6 @@
 --  ║ » Serverside file         ║
 --  ╚═══════════════════════════╝
 print("NGH - Simply Gravgun Module loaded!")
-
 hook.Add("GravGunOnPickedUp", "GGP_GRAVGUN_PREVENTION", function(_, ent)
     if not IsValid(ent) then return end
     if engine.ActiveGamemode() == "darkrp" then
