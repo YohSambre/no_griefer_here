@@ -4,6 +4,8 @@
 --  ║ » Serverside file         ║
 --  ╚═══════════════════════════╝
 print("NGH - Simply Physgun Module loaded!")
+local ngh_customm = CreateConVar("sv_ngh_material", "models/shiny", {FCVAR_NONE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Choose your material for ghost mode props")
+
 -- should discourage those who unlock a lot of props at once (hi guys who use "stacker tool")
 local function PhysgunBasicProtection(ply)
     return false
@@ -46,8 +48,9 @@ local function NGHOPP(ply, ent)
     if engine.ActiveGamemode() == "darkrp" then
         if not (ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and tClassEntities[ent:GetClass()]) then return end
     end
+    ent.IsGrabbed = true
         ent:SetCollisionGroup(11)
-        ent:SetMaterial("models/shiny") -- https://www.youtube.com/watch?v=TsIhEbXOqQ8
+        ent:SetMaterial(ngh_customm:GetString())
         constraint.RemoveConstraints(ent, "Weld")
         constraint.RemoveConstraints(ent, "Hydraulic")
         constraint.RemoveConstraints(ent, "Elastic")
@@ -64,8 +67,9 @@ local function NGHOPD(ply, ent)
     if engine.ActiveGamemode() == "darkrp" then
         if not (ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and tClassEntities[ent:GetClass()]) then return end
     end
+    ent.IsGrabbed = false
         timer.Create( "NGH_PD", 7, 1, function() -- i obviously wanted to use timer.Simple , the problem was that it caused a problem that bypassed my antipropblock/proppush
-            if IsValid(ent) then
+        if IsValid(ent) and not ent.IsGrabbed then
             ent:SetCollisionGroup(0)
             ent:SetMaterial("")
         end
@@ -78,7 +82,7 @@ local function NGHOEC(ent)
         timer.Simple(0, function()
             if IsValid(ent) then
                 ent:SetCollisionGroup(11)
-                ent:SetMaterial("models/shiny")
+                ent:SetMaterial(ngh_customm:GetString())
                 timer.Simple(3, function()
                     if IsValid(ent) then
                         ent:SetCollisionGroup(0)
