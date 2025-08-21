@@ -6,9 +6,8 @@
 print("NGH - Simply Spawning Cooldown Module loaded!")
 -- I'm going to be hated for this huho!
 local delay = {}
-
-local cooldown_toolgun = CreateConVar("sv_cooldown_toolgun", "0.8", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "slow down toolgun execution speed")
-local cooldown_propspawn = CreateConVar("sv_cooldown_propspawn", "0.7", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "slow down spawning execution speed")
+local cooldown_toolgun = CreateConVar("sv_cooldown_toolgun", "0.8", {FCVAR_NONE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "slow down toolgun execution speed")
+local cooldown_propspawn = CreateConVar("sv_cooldown_propspawn", "0.7", {FCVAR_NONE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "slow down spawning execution speed")
 
 local function CooldownMeStronger(ply, action, duration)
     if not IsValid(ply) then return false end
