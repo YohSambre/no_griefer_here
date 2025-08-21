@@ -5,11 +5,9 @@
 --  ╚═══════════════════════════╝
 print("NGH - Simply Physgun Module loaded!")
 -- should discourage those who unlock a lot of props at once (hi guys who use "stacker tool")
-
 local function PhysgunBasicProtection(ply)
     return false
 end
-
 hook.Add("OnPhysgunReload", "PPP_PHYSGUN_BASIC_PREVENTION", PhysgunBasicProtection)
 
 local function SoBad(_, ply)
@@ -17,21 +15,16 @@ local function SoBad(_, ply)
     if not (ply:IsAdmin()) and iValue ~= "255 255 0" then
         ply:SendLua('RunConsoleCommand("cl_weaponcolor", "255 255 0")') -- (é_é')
     end
-
 end
-
 hook.Add("WeaponEquip", "NGH_INITIALSPAWN_PHYSGUN_LASER_CATCHER", SoBad)
 
 local function SoNotCrazy(ply)
     if not IsValid(ply) then return end
-
     local iValue = ply:GetInfo("physgun_wheelspeed")
-
     if iValue ~= "90" then
         ply:SendLua('RunConsoleCommand("physgun_wheelspeed", "90")')
     end
 end
-
 hook.Add("PhysgunPickup", "NGH_INITIALSPAWN_PHYSGUN_CRAZYWHEELSPEED_CATCHER", SoNotCrazy)
 hook.Add("PhysgunDrop", "NGH_SPAWN_PHYSGUN_LASER_CRAZYWHEELSPEED_CATCHER", SoNotCrazy)
 
@@ -50,7 +43,6 @@ local tClassEntities = {
 
 local function NGHOPP(ply, ent)
     if not IsValid(ent) then return end
-
     if engine.ActiveGamemode() == "darkrp" then
         if not (ent.CPPIGetOwner and ent:CPPIGetOwner() == ply and tClassEntities[ent:GetClass()]) then return end
     end
@@ -98,4 +90,3 @@ local function NGHOEC(ent)
     end
 end
 hook.Add("OnEntityCreated", "NGH_GHOSTED_SPAWNED_ENTITY", NGHOEC)
-
