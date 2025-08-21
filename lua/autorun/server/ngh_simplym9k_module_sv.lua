@@ -31,7 +31,6 @@ hook.Add( "PhysgunPickup", "NGH_SIMPLY_M9K_MODULE_PP", function (ply, weapon) --
 	return SoEvil(ply, weapon:GetClass(), weapon)
 end)
 
-
 -- i prefer not to take unnecessary risk. 
 local function NiceTryButNope(ent,ply)
     if IsValid(ent) and (ent:GetClass() == "m9k_davy_crockett" or ent:GetClass() == "m9k_orbital_strike") then
@@ -44,7 +43,6 @@ local function NiceTryButNope(ent,ply)
     end
 end
 hook.Add("OnEntityCreated", "NGH_SIMPLY_M9K_MODULE_OEC", NiceTryButNope)
-
 
 hook.Add("PlayerUse", "NGH_SIMPLY_M9K_MODULE_PU", function(ply, ent)
     if IsValid(ent) and (ent:GetClass() == "m9k_davy_crockett" or ent:GetClass() == "m9k_orbital_strike") then
