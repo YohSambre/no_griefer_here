@@ -392,11 +392,9 @@ local function Soboring(_, eWep)
         ["arccw_nade_smoke"] = true,
         ["arccw_nade_incendiary"] = true,
     }
-
     if IsValid(eWep) and weaponsClasses[eWep:GetClass()] then
         eWep:SetCollisionGroup(1)
     end
 end
-
 hook.Add("PlayerDroppedWeapon", "NGH_DROPPED_WEAPONS_COLLISION_CATCHER", Soboring)
 hook.Add("PlayerSpawnedSWEP", "NGH_SPAWNMENU_WEAPONS_COLLISION_CATCHER", Soboring)
